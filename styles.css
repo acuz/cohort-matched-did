@@ -1,0 +1,15 @@
+/* Bias / coverage tables */
+table.biastab { font-size: 0.86rem; }
+table.biastab th { font-weight: 600; vertical-align: bottom; }
+table.biastab td { white-space: nowrap; }
+table.biastab mjx-container { white-space: nowrap; }
+table.biastab .rmse { opacity: 0.65; font-size: 0.78rem; }
+
+.biaslegend { font-size: 0.85rem; }
+.biaslegend span { display: inline-block; padding: 1px 7px; margin: 0 2px; border-radius: 3px; }
+
+/* Key-message callout on the overview */
+.keymsg { border-left: 4px solid #1b5fa8; padding: 0.4rem 1rem; margin: 1rem 0; background: rgba(27, 95, 168, 0.06); }
+
+/* Figures never overflow on phones */
+.cell-output-display img { max-width: 100%; height: auto; }

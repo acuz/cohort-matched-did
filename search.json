@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "weights.html",
+    "href": "weights.html",
+    "title": "Implicit weights",
+    "section": "",
+    "text": "Every estimator on this site can be written as a weighted average of simple comparisons, in the spirit of Goodman-Bacon (2021): \\[\n\\hat\\theta = \\sum_c \\omega_c\\, \\hat\\delta_c .\n\\] The decomposition works at two levels. For the CS-type estimators, cohort effects are aggregated with weights \\(\\omega_g\\) (level 1), and each cohort effect is computed against a comparison group with a given composition across matched-cohort labels (level 2). For TWFE, the weights are those of its \\(2\\times2\\) comparisons, including comparisons that use already-treated units as controls.\nThe figures use the constant-effect pattern, where the true effect is 2 (dashed line). The vertical distance of a point from the line is the bias of that comparison, and its horizontal position is the weight it carries."
+  },
+  {
+    "objectID": "weights.html#comparisons-and-their-weights",
+    "href": "weights.html#comparisons-and-their-weights",
+    "title": "Implicit weights",
+    "section": "Comparisons and their weights",
+    "text": "Comparisons and their weights\n\nNo trendLinear in X and ZDrifting XCohort-specific slopes"
+  },
+  {
+    "objectID": "weights.html#composition-of-the-comparison-group",
+    "href": "weights.html#composition-of-the-comparison-group",
+    "title": "Implicit weights",
+    "section": "Composition of the comparison group",
+    "text": "Composition of the comparison group\nFor each treated cohort, the bars show where its comparison group comes from. CM-CS uses only the controls matched to that cohort. The pooled matched estimator uses the same mixture of all cohorts’ matched controls for every cohort, and that mixture is the source of the pooling bias.\n\nNo trendLinear in X and ZDrifting XCohort-specific slopes"
+  },
+  {
+    "objectID": "inference.html",
+    "href": "inference.html",
+    "title": "Inference",
+    "section": "",
+    "text": "The paper discusses three ways to compute standard errors for CM-CS. They differ in what they hold fixed:\nThe results below come from 300 Monte Carlo replications per design, with the overall ATT of CM-CS as the target. They describe the designs we simulate; they are not general results."
+  },
+  {
+    "objectID": "inference.html#coverage",
+    "href": "inference.html#coverage",
+    "title": "Inference",
+    "section": "Coverage",
+    "text": "Coverage\n\nConstant effectDynamic, cohort-heterogeneous effect\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn these designs:\n\nThe default bootstrap is close to nominal when parallel trends hold unconditionally. It over-covers once trends depend on the covariates. Matched pairs co-move through their common trend, the within-pair covariance of the influence functions is negative, and ignoring it overstates the variance.\nMatched-set clustering restores that covariance and is close to nominal coverage in every design (0.93–0.95).\nThe joint bootstrap repeats the matching in every replication and is also close to nominal (0.94–0.96). Its standard errors are within 7% of the clustered ones. So in these designs the variability from selecting the matches is largely captured by clustering on the realized pairs, as the theory for matching without replacement predicts."
+  },
+  {
+    "objectID": "inference.html#standard-errors",
+    "href": "inference.html#standard-errors",
+    "title": "Inference",
+    "section": "Standard errors",
+    "text": "Standard errors\n\n\n\n\n\nMean standard error of the overall ATT, relative to the default bootstrap.\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIn the empirical application the paper reports the multiplier bootstrap clustered at the pre-displacement firm. A treated worker and the matched control are generally employed in different firms, so this construction also omits the within-pair covariance, which on its own makes it conservative in the designs above."
+  },
+  {
+    "objectID": "design.html",
+    "href": "design.html",
+    "title": "Simulation design",
+    "section": "",
+    "text": "Each replication draws a balanced panel of 1950 units observed over \\(T = 12\\) periods. Three cohorts are treated, first in periods 4, 7 and 10; a reservoir of never-treated units supplies the controls.\n\n\n\nGroup\nFirst treated\nUnits\n\\(X \\sim\\)\n\\(\\Pr(Z=1)\\)\n\\(\\Pr(U=1)\\)\n\n\n\n\nCohort 4\n\\(g = 4\\)\n150\n\\(N(0,\\,1)\\)\n0.75\n0.8\n\n\nCohort 7\n\\(g = 7\\)\n250\n\\(N(1.5,\\,0.75^2)\\)\n0.50\n0.5\n\n\nCohort 10\n\\(g = 10\\)\n350\n\\(N(3,\\,0.5^2)\\)\n0.25\n0.2\n\n\nNever treated\n—\n1200\nmixture of the three cohort laws\n\n\n\n\n\nThe never-treated reservoir is built from three equal-sized blocks whose covariates follow the three cohort distributions, so that every cohort has suitable matches. Adjacent cohorts overlap in \\(X\\): the covariate is an informative but noisy predictor of a unit’s cohort, and the middle cohort overlaps with both neighbours. \\(X\\) and \\(Z\\) are observed; \\(U\\) is a latent characteristic that enters untreated outcomes in some designs but is never available to the estimators."
+  },
+  {
+    "objectID": "design.html#population",
+    "href": "design.html#population",
+    "title": "Simulation design",
+    "section": "",
+    "text": "Each replication draws a balanced panel of 1950 units observed over \\(T = 12\\) periods. Three cohorts are treated, first in periods 4, 7 and 10; a reservoir of never-treated units supplies the controls.\n\n\n\nGroup\nFirst treated\nUnits\n\\(X \\sim\\)\n\\(\\Pr(Z=1)\\)\n\\(\\Pr(U=1)\\)\n\n\n\n\nCohort 4\n\\(g = 4\\)\n150\n\\(N(0,\\,1)\\)\n0.75\n0.8\n\n\nCohort 7\n\\(g = 7\\)\n250\n\\(N(1.5,\\,0.75^2)\\)\n0.50\n0.5\n\n\nCohort 10\n\\(g = 10\\)\n350\n\\(N(3,\\,0.5^2)\\)\n0.25\n0.2\n\n\nNever treated\n—\n1200\nmixture of the three cohort laws\n\n\n\n\n\nThe never-treated reservoir is built from three equal-sized blocks whose covariates follow the three cohort distributions, so that every cohort has suitable matches. Adjacent cohorts overlap in \\(X\\): the covariate is an informative but noisy predictor of a unit’s cohort, and the middle cohort overlaps with both neighbours. \\(X\\) and \\(Z\\) are observed; \\(U\\) is a latent characteristic that enters untreated outcomes in some designs but is never available to the estimators."
+  },
+  {
+    "objectID": "design.html#outcomes",
+    "href": "design.html#outcomes",
+    "title": "Simulation design",
+    "section": "Outcomes",
+    "text": "Outcomes\nUntreated outcomes follow \\[\nY_{it}(0) = \\alpha_i + \\lambda t + \\mathrm{PT}_{it} + \\varepsilon_{it},\n\\qquad\nY_{it} = Y_{it}(0) + \\mathbf{1}\\{t \\ge G_i\\}\\,\\tau_{it},\n\\] with unit fixed effects \\(\\alpha_i\\), a common trend \\(\\lambda t\\), idiosyncratic noise \\(\\varepsilon_{it}\\) and a design-specific trend component \\(\\mathrm{PT}_{it}\\) that may depend on the unit’s characteristics.\n\nUntreated trend designs\n\n\n\n\n\n\n\n\nDesign\nTrend term PT\nDescription\n\n\n\n\nNo trend\n\\(0\\)\nParallel trends hold unconditionally\n\n\nLinear in X and Z\n\\((0.2X+0.2Z)\\,t\\)\nUntreated trend linear in X and Z\n\n\nLinear in X\n\\(0.2\\,X t\\)\nUntreated trend linear in X only\n\n\nLinear in Z\n\\(0.2\\,Z t\\)\nUntreated trend linear in Z only\n\n\nX × Z interaction\n\\(0.2\\,XZ\\,t\\)\nUntreated trend driven by the interaction X × Z\n\n\nQuadratic in X\n\\(0.1\\,X^2 t\\)\nUntreated trend quadratic in X\n\n\nLatent U\n\\(0.25\\,U t\\)\nLinear trend in a latent, cohort-correlated characteristic U\n\n\nStep in X\n\\(X\\,\\mathbf{1}(t\\ge 8)\\)\nLevel shift from period 8 proportional to X\n\n\nStep in latent U\n\\(U\\,\\mathbf{1}(t\\ge 8)\\)\nLevel shift from period 8 proportional to the latent U\n\n\nDrifting X\n\\(0.2\\,X_{it}\\,t\\)\nTrend in X, with X drifting at cohort-specific rates after matching\n\n\nCohort-specific slopes\n\\(\\delta_g\\, t\\)\nCohort-specific trend slopes unrelated to X\n\n\n\nIn the drifting X design, \\(X_{it} = X_{i0} + \\kappa_g (t-1)\\) with cohort-specific drift rates, so that units matched on \\(X\\) at baseline diverge afterwards. In the cohort-specific slopes design each cohort, and the never-treated units drawn from its covariate law, has its own trend slope \\(\\delta_g\\), unrelated to \\(X\\).\n\n\nTreatment-effect patterns\n\n\n\n\n\n\n\n\n\n\nPattern\nUnit-level effect \\(\\tau_{it}\\), \\(e = t - g\\)\n\\(ATT(4,e)\\)\n\\(ATT(7,e)\\)\n\\(ATT(10,e)\\)\n\n\n\n\nConstant\n\\(2\\)\n\\(2\\)\n\\(2\\)\n\\(2\\)\n\n\nDynamic, cohort-heterogeneous\n\\(a_g + d_g\\, e\\)\n\\(1 + 0.5e\\)\n\\(1.5 + 0.75e\\)\n\\(2 + e\\)\n\n\nCovariate-dependent\n\\(2 + b_g X_i\\), \\(b_g = 0.5, 0.75, 1\\)\n\\(2\\)\n\\(3.125\\)\n\\(5\\)\n\n\n\nThe constant pattern isolates bias that comes from the comparison group. The dynamic pattern is the one reported in the paper’s Monte Carlo table. In the covariate-dependent pattern the effect varies with a matching covariate, so a cohort’s average effect depends on its covariate composition."
+  },
+  {
+    "objectID": "design.html#matching",
+    "href": "design.html#matching",
+    "title": "Simulation design",
+    "section": "Matching",
+    "text": "Matching\nTreated units are matched one-to-one, without replacement, to never-treated units by nearest neighbour on the standardized covariates \\((X, Z)\\) measured at \\(g-3\\), before any treatment-related dynamics. Matching proceeds sequentially in order of treatment: cohort 4 first, then 7, then 10, each drawing from the controls left by earlier cohorts. Every matched control therefore carries the label of the cohort it was matched to; never-treated units that are not matched are dropped.\nThe simulation uses greedy nearest-neighbour matching within each cohort. The paper’s application chooses the within-cohort assignment to minimize the total covariate discrepancy; the two coincide whenever matches are not contested."
+  },
+  {
+    "objectID": "design.html#estimators",
+    "href": "design.html#estimators",
+    "title": "Simulation design",
+    "section": "Estimators",
+    "text": "Estimators\n\n\n\n\n\n\n\n\nEstimator\nImplementation\nControls for cohort \\(g\\)\n\n\n\n\nTWFE, matched sample\nEvent-study regression with unit and period fixed effects on the matched sample\nEveryone else in the matched sample\n\n\nCS, pooled matched sample\ndid::att_gt, never-treated controls, no covariates, on the matched sample\nAll matched controls, regardless of cohort\n\n\nCM-CS (ours)\natt_gt_mc(match_cohort = TRUE)\nOnly the controls matched to cohort \\(g\\)\n\n\nCS, covariates\ndid::att_gt on the full sample with linear covariates \\(X\\), \\(Z\\) (doubly robust)\nAll never-treated units, reweighted by covariates\n\n\n\nThe last estimator does not use matching; it appears on the Matching vs. conditioning page. All CS-type estimators use a universal base period \\(g-1\\) and are aggregated to event time with cohort-share weights. Bias statistics average the event-study estimates over post-treatment periods \\(e \\ge 0\\) across 100 replications."
+  },
+  {
+    "objectID": "conditioning.html",
+    "href": "conditioning.html",
+    "title": "Matching vs. conditioning",
+    "section": "",
+    "text": "The cohort-matched estimator rests on conditional parallel trends: within cohort \\(g\\), treated and never-treated units with the same pre-treatment covariates \\(X^{(g)}_i\\) would have followed the same untreated trend. Matching is one way to estimate the counterfactual trend under this assumption. The other is to keep all never-treated units and adjust for covariates directly, as in the doubly robust estimator of Callaway & Sant’Anna (2021) with covariates \\(X\\) and \\(Z\\) (CS, covariates). It combines a linear outcome regression for the untreated trend with a propensity score for cohort membership.\nBoth routes target the same parameter. They differ in how they estimate the conditional expectation \\(\\mu^{g}_{\\Delta,t}(x) = \\mathbb{E}[Y_t - Y_{g-1}\\mid G=\\infty, X^{(g)}=x]\\): matching is nonparametric, while covariate adjustment relies on a working model."
+  },
+  {
+    "objectID": "conditioning.html#two-routes-to-the-same-identifying-assumption",
+    "href": "conditioning.html#two-routes-to-the-same-identifying-assumption",
+    "title": "Matching vs. conditioning",
+    "section": "",
+    "text": "The cohort-matched estimator rests on conditional parallel trends: within cohort \\(g\\), treated and never-treated units with the same pre-treatment covariates \\(X^{(g)}_i\\) would have followed the same untreated trend. Matching is one way to estimate the counterfactual trend under this assumption. The other is to keep all never-treated units and adjust for covariates directly, as in the doubly robust estimator of Callaway & Sant’Anna (2021) with covariates \\(X\\) and \\(Z\\) (CS, covariates). It combines a linear outcome regression for the untreated trend with a propensity score for cohort membership.\nBoth routes target the same parameter. They differ in how they estimate the conditional expectation \\(\\mu^{g}_{\\Delta,t}(x) = \\mathbb{E}[Y_t - Y_{g-1}\\mid G=\\infty, X^{(g)}=x]\\): matching is nonparametric, while covariate adjustment relies on a working model."
+  },
+  {
+    "objectID": "conditioning.html#an-implementation-identity",
+    "href": "conditioning.html#an-implementation-identity",
+    "title": "Matching vs. conditioning",
+    "section": "An implementation identity",
+    "text": "An implementation identity\nTake the matched sample and run CS with never-treated controls, conditioning on a set of dummies for the cohort each control was matched to. This reproduces CM-CS exactly: across all designs and patterns on this site, the two event-study estimates differ by at most 9e-16. With a saturated label, conditioning reduces to restricting each cohort to its own matched controls. This is an identity between two estimators, and a useful check on an implementation. It is not an identifying assumption: the label is produced by the matching in a given sample, not a characteristic of the population. The pooled matched estimator is the same regression without the label, and its bias is the cost of dropping it."
+  },
+  {
+    "objectID": "conditioning.html#when-covariate-adjustment-delivers-the-same-answer",
+    "href": "conditioning.html#when-covariate-adjustment-delivers-the-same-answer",
+    "title": "Matching vs. conditioning",
+    "section": "When covariate adjustment delivers the same answer",
+    "text": "When covariate adjustment delivers the same answer\n\n\n\n\n\nMean bias over post-treatment periods: cohort-matched CS versus CS with linear covariate adjustment on the full sample.\n\n\n\n\nWhen the untreated trend is linear in the observed covariates (Linear in X and Z, Linear in X, Linear in Z, Step in X), the working model is correctly specified. Covariate adjustment is then unbiased, like matching, and a little more precise because it uses every never-treated unit:\n\n\n\n\n\nUntreated trend\n\n\nTrend term\n\n\nCM-CS (ours)\n\n\nCS, covariates (conditional PT)\n\n\n\n\n\n\nNo trend\n\n\n\\(0\\)\n\n\n-0.002 [0.052]\n\n\n-0.002 [0.042]\n\n\n\n\nLinear in X and Z\n\n\n\\((0.2X+0.2Z)\\,t\\)\n\n\n-0.003 [0.059]\n\n\n0.002 [0.046]\n\n\n\n\nLinear in X\n\n\n\\(0.2\\,X t\\)\n\n\n-0.001 [0.061]\n\n\n-0.002 [0.049]\n\n\n\n\nLinear in Z\n\n\n\\(0.2\\,Z t\\)\n\n\n0.001 [0.055]\n\n\n0.000 [0.046]\n\n\n\n\nStep in X\n\n\n\\(X\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n0.003 [0.055]\n\n\n0.003 [0.046]\n\n\n\n\n\n\nCells: mean bias of ATT(e) over e ≥ 0 [RMSE]. Shading by |bias|: &lt; 0.020.02–0.050.05–0.100.10–0.50≥ 0.50 Monte Carlo standard error of a bias cell: 0.002–0.013 (median 0.004)."
+  },
+  {
+    "objectID": "conditioning.html#the-cost-of-matching",
+    "href": "conditioning.html#the-cost-of-matching",
+    "title": "Matching vs. conditioning",
+    "section": "The cost of matching",
+    "text": "The cost of matching\nOne-to-one matching keeps one control per treated unit and discards the rest of the never-treated reservoir. When the covariate-adjusted model is correctly specified, that loss shows up as lower precision. With no trend, or a trend linear in \\(X\\) and \\(Z\\), CS with covariates has an RMSE about a fifth lower than CM-CS, and narrower replication bands. Once the working model is misspecified, its bias dominates and the ranking reverses.\n\n\n\n\n\nUntreated trend\n\n\nCM-CS (ours)\n\n\nCS, covariates (conditional PT)\n\n\nCS, pooled matched sample\n\n\n\n\n\n\nNo trend\n\n\n0.052 [0.206]\n\n\n0.042 [0.158]\n\n\n0.040 [0.152]\n\n\n\n\nLinear in X and Z\n\n\n0.059 [0.224]\n\n\n0.046 [0.171]\n\n\n1.119 [0.265]\n\n\n\n\nX × Z interaction\n\n\n0.058 [0.216]\n\n\n0.204 [0.262]\n\n\n0.377 [0.272]\n\n\n\n\nQuadratic in X\n\n\n0.059 [0.209]\n\n\n0.657 [0.357]\n\n\n1.746 [0.260]\n\n\n\n\nLatent U\n\n\n0.104 [0.265]\n\n\n0.118 [0.234]\n\n\n0.328 [0.228]\n\n\n\n\n\n\nCells: RMSE of ATT(e), averaged over e ≥ 0 [mean width of the central 95% band of the replications].\n\nMatching therefore buys robustness to the functional form of the trend, at a price in variance when that functional form is known."
+  },
+  {
+    "objectID": "conditioning.html#where-covariate-adjustment-breaks-down",
+    "href": "conditioning.html#where-covariate-adjustment-breaks-down",
+    "title": "Matching vs. conditioning",
+    "section": "Where covariate adjustment breaks down",
+    "text": "Where covariate adjustment breaks down\nCovariate adjustment needs the functional form of the trend to be right; matching does not.\n\nMisspecified functional form. With an interaction (X × Z) or a quadratic (Quadratic in X) trend, the linear working model is wrong and the estimator is biased. Under the quadratic trend the bias is large, because the cohorts have little overlap in \\(X\\) and the linear model has to extrapolate across cohorts. Matching compares units with nearby covariate values and is unaffected here, because the never-treated reservoir is drawn to cover each cohort’s covariate distribution. If the control pool itself overlapped poorly with a cohort, matching would suffer too, through poorer matches.\nLatent or moving trend drivers. Under a latent trend or drifting covariates both approaches are biased, and covariate adjustment more so in our designs.\n\nAdding the right interactions or polynomial terms would repair the covariate-adjusted estimator, but only if the researcher knows which ones to add.\n\nLinear in X and ZX × Z interactionQuadratic in XLatent UDrifting X\n\n\nUntreated trend linear in X and Z: \\((0.2X+0.2Z)\\,t\\).\n\n\n\nUntreated trend driven by the interaction X × Z: \\(0.2\\,XZ\\,t\\).\n\n\n\nUntreated trend quadratic in X: \\(0.1\\,X^2 t\\).\n\n\n\nLinear trend in a latent, cohort-correlated characteristic U: \\(0.25\\,U t\\).\n\n\n\nTrend in X, with X drifting at cohort-specific rates after matching: \\(0.2\\,X_{it}\\,t\\).\n\n\n\n\n\n\n\n\n\nUntreated trend\n\n\nTrend term\n\n\nCM-CS (ours)\n\n\nCS, covariates (conditional PT)\n\n\n\n\n\n\nX × Z interaction\n\n\n\\(0.2\\,XZ\\,t\\)\n\n\n0.001 [0.058]\n\n\n0.191 [0.204]\n\n\n\n\nQuadratic in X\n\n\n\\(0.1\\,X^2 t\\)\n\n\n0.013 [0.059]\n\n\n-0.648 [0.657]\n\n\n\n\nLatent U\n\n\n\\(0.25\\,U t\\)\n\n\n0.058 [0.104]\n\n\n0.090 [0.118]\n\n\n\n\nStep in latent U\n\n\n\\(U\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n0.026 [0.073]\n\n\n0.047 [0.076]\n\n\n\n\nDrifting X\n\n\n\\(0.2\\,X_{it}\\,t\\)\n\n\n-0.140 [0.179]\n\n\n-0.174 [0.198]\n\n\n\n\nCohort-specific slopes\n\n\n\\(\\delta_g\\, t\\)\n\n\n0.114 [0.147]\n\n\n0.186 [0.206]\n\n\n\n\n\n\nCells: mean bias of ATT(e) over e ≥ 0 [RMSE]. Shading by |bias|: &lt; 0.020.02–0.050.05–0.100.10–0.50≥ 0.50 Monte Carlo standard error of a bias cell: 0.002–0.013 (median 0.004)."
+  },
+  {
+    "objectID": "conditioning.html#limits-shared-by-matching-and-conditioning",
+    "href": "conditioning.html#limits-shared-by-matching-and-conditioning",
+    "title": "Matching vs. conditioning",
+    "section": "Limits shared by matching and conditioning",
+    "text": "Limits shared by matching and conditioning\nMatching and covariate adjustment use the same information: the observed pre-treatment covariates. In these designs, both can only correct for differences in untreated trends to the extent that the covariates reveal them. Neither can remove a bias from a trend driver that the covariates do not capture. What matching adds is robustness to the functional form, not to missing information.\nThe way to do better is to put more information into the matching variables. When the trend driver is a covariate that drifts after matching, matching on the covariate’s trajectory (its values at \\(g-3\\) and \\(g-1\\)) instead of a single snapshot recovers most of the bias:\n\n\n\n\n\nUntreated trend\n\n\nTrend term\n\n\nCM-CS (ours)\n\n\nCM-CS, trajectory matching\n\n\nCS, covariates (conditional PT)\n\n\n\n\n\n\nDrifting X\n\n\n\\(0.2\\,X_{it}\\,t\\)\n\n\n-0.140 [0.179]\n\n\n-0.017 [0.064]\n\n\n-0.174 [0.198]\n\n\n\n\nCohort-specific slopes\n\n\n\\(\\delta_g\\, t\\)\n\n\n0.114 [0.147]\n\n\n0.114 [0.147]\n\n\n0.186 [0.206]\n\n\n\n\nLatent U\n\n\n\\(0.25\\,U t\\)\n\n\n0.058 [0.104]\n\n\n0.058 [0.104]\n\n\n0.090 [0.118]\n\n\n\n\n\n\nCells: mean bias of ATT(e) over e ≥ 0 [RMSE]. Shading by |bias|: &lt; 0.020.02–0.050.05–0.100.10–0.50≥ 0.50 Monte Carlo standard error of a bias cell: 0.002–0.013 (median 0.004).\n\nThe gain appears only when the trajectory carries information about the trend. With cohort-specific slopes unrelated to \\(X\\), or with a latent driver, trajectory matching changes nothing."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Matched difference-in-differences with staggered treatment",
+    "section": "",
+    "text": "Matched difference-in-differences designs are the workhorse of the job-displacement literature: each displaced worker is matched to similar non-displaced workers before displacement, and effects are estimated on the matched sample. With staggered treatment, the matched controls of one cohort were chosen to resemble that cohort, not the others. Standard estimators applied to the pooled matched sample nonetheless compare each cohort with every cohort’s matched controls, which reintroduces the cross-cohort imbalance that matching was meant to remove.\nThis site collects the Monte Carlo evidence behind the estimator proposed in the paper. It compares three ways of estimating event-study effects on a matched sample:\n\n\n\nEstimator\nComparison group for cohort \\(g\\)\n\n\n\n\nTWFE, matched sample\nAll other units in the matched sample: own and other cohorts’ matched controls, not-yet-treated and already-treated units\n\n\nCS, pooled matched sample\nCallaway & Sant’Anna (2021) with every matched control treated as never-treated\n\n\nCM-CS (ours)\nOnly the never-treated units matched to cohort \\(g\\) itself"
+  },
+  {
+    "objectID": "index.html#the-problem",
+    "href": "index.html#the-problem",
+    "title": "Matched difference-in-differences with staggered treatment",
+    "section": "",
+    "text": "Matched difference-in-differences designs are the workhorse of the job-displacement literature: each displaced worker is matched to similar non-displaced workers before displacement, and effects are estimated on the matched sample. With staggered treatment, the matched controls of one cohort were chosen to resemble that cohort, not the others. Standard estimators applied to the pooled matched sample nonetheless compare each cohort with every cohort’s matched controls, which reintroduces the cross-cohort imbalance that matching was meant to remove.\nThis site collects the Monte Carlo evidence behind the estimator proposed in the paper. It compares three ways of estimating event-study effects on a matched sample:\n\n\n\nEstimator\nComparison group for cohort \\(g\\)\n\n\n\n\nTWFE, matched sample\nAll other units in the matched sample: own and other cohorts’ matched controls, not-yet-treated and already-treated units\n\n\nCS, pooled matched sample\nCallaway & Sant’Anna (2021) with every matched control treated as never-treated\n\n\nCM-CS (ours)\nOnly the never-treated units matched to cohort \\(g\\) itself"
+  },
+  {
+    "objectID": "index.html#headline-result",
+    "href": "index.html#headline-result",
+    "title": "Matched difference-in-differences with staggered treatment",
+    "section": "Headline result",
+    "text": "Headline result\n\n\n\n\n\nMean bias of the event-study estimates over post-treatment periods, by source of the untreated trend (rows) and treatment-effect pattern (panels). 100 Monte Carlo replications.\n\n\n\n\n\nOnce untreated outcome trends depend on the matching covariates, applying CS or TWFE to the pooled matched sample is biased, even though every treated unit has a close match. Restricting each cohort to its own matched controls (CM-CS) removes this pooling bias. TWFE is additionally biased when effects differ across cohorts, even without any trend. A small bias remains for CM-CS only when trends are driven by characteristics that matching on the observed covariates cannot balance."
+  },
+  {
+    "objectID": "index.html#where-to-go-next",
+    "href": "index.html#where-to-go-next",
+    "title": "Matched difference-in-differences with staggered treatment",
+    "section": "Where to go next",
+    "text": "Where to go next\n\nSimulation design: the data-generating process, the trend designs and the matching scheme.\nResults: event-study plots and bias tables for the three estimators, three treatment-effect patterns and eleven trend designs.\nMatching vs. conditioning: when conditional parallel trends with covariate adjustment delivers the same answer, and where it breaks down.\nInference: coverage of the three variance constructions discussed in the paper.\nImplicit weights: which \\(2\\times2\\) comparisons each estimator averages over."
+  },
+  {
+    "objectID": "results.html",
+    "href": "results.html",
+    "title": "Results",
+    "section": "",
+    "text": "Each tab shows the event-study estimates \\(\\widehat{ATT}(e)\\): lines are Monte Carlo means, shaded bands contain the central 95% of the 100 replications, and the black line is the true effect. The table under each pattern summarizes all designs at once."
+  },
+  {
+    "objectID": "results.html#constant-effect",
+    "href": "results.html#constant-effect",
+    "title": "Results",
+    "section": "Constant effect",
+    "text": "Constant effect\nEvery treated unit has the same effect, \\(ATT(g,t) = 2\\). Any gap between an estimate and the flat line is bias from the comparison group, not from effect heterogeneity.\n\nNo trendLinear in X and ZLinear in XLinear in ZX × Z interactionQuadratic in XLatent UStep in XStep in latent UDrifting XCohort-specific slopes\n\n\nParallel trends hold unconditionally: there is no trend term.\n\n\n\nUntreated trend linear in X and Z: \\((0.2X+0.2Z)\\,t\\).\n\n\n\nUntreated trend linear in X only: \\(0.2\\,X t\\).\n\n\n\nUntreated trend linear in Z only: \\(0.2\\,Z t\\).\n\n\n\nUntreated trend driven by the interaction X × Z: \\(0.2\\,XZ\\,t\\).\n\n\n\nUntreated trend quadratic in X: \\(0.1\\,X^2 t\\).\n\n\n\nLinear trend in a latent, cohort-correlated characteristic U: \\(0.25\\,U t\\).\n\n\n\nLevel shift from period 8 proportional to X: \\(X\\,\\mathbf{1}(t\\ge 8)\\).\n\n\n\nLevel shift from period 8 proportional to the latent U: \\(U\\,\\mathbf{1}(t\\ge 8)\\).\n\n\n\nTrend in X, with X drifting at cohort-specific rates after matching: \\(0.2\\,X_{it}\\,t\\).\n\n\n\nCohort-specific trend slopes unrelated to X: \\(\\delta_g\\, t\\).\n\n\n\n\n\n\n\n\n\nUntreated trend\n\n\nTrend term\n\n\nTWFE, matched sample\n\n\nCS, pooled matched sample\n\n\nCM-CS (ours)\n\n\n\n\n\n\nNo trend\n\n\n\\(0\\)\n\n\n0.001 [0.040]\n\n\n-0.001 [0.046]\n\n\n-0.003 [0.054]\n\n\n\n\nLinear in X and Z\n\n\n\\((0.2X+0.2Z)\\,t\\)\n\n\n-1.178 [1.182]\n\n\n-1.101 [1.113]\n\n\n0.001 [0.058]\n\n\n\n\nLinear in X\n\n\n\\(0.2\\,X t\\)\n\n\n-1.421 [1.424]\n\n\n-1.332 [1.345]\n\n\n0.004 [0.053]\n\n\n\n\nLinear in Z\n\n\n\\(0.2\\,Z t\\)\n\n\n0.238 [0.246]\n\n\n0.221 [0.233]\n\n\n-0.002 [0.057]\n\n\n\n\nX × Z interaction\n\n\n\\(0.2\\,XZ\\,t\\)\n\n\n-0.329 [0.341]\n\n\n-0.358 [0.377]\n\n\n-0.001 [0.060]\n\n\n\n\nQuadratic in X\n\n\n\\(0.1\\,X^2 t\\)\n\n\n-2.016 [2.017]\n\n\n-1.734 [1.746]\n\n\n0.003 [0.055]\n\n\n\n\nLatent U\n\n\n\\(0.25\\,U t\\)\n\n\n0.336 [0.345]\n\n\n0.313 [0.329]\n\n\n0.060 [0.101]\n\n\n\n\nStep in X\n\n\n\\(X\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n-1.076 [1.079]\n\n\n-0.896 [0.902]\n\n\n0.007 [0.059]\n\n\n\n\nStep in latent U\n\n\n\\(U\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n0.208 [0.216]\n\n\n0.175 [0.186]\n\n\n0.032 [0.074]\n\n\n\n\nDrifting X\n\n\n\\(0.2\\,X_{it}\\,t\\)\n\n\n-2.296 [2.298]\n\n\n-2.144 [2.219]\n\n\n-0.140 [0.180]\n\n\n\n\nCohort-specific slopes\n\n\n\\(\\delta_g\\, t\\)\n\n\n0.665 [0.669]\n\n\n0.620 [0.639]\n\n\n0.111 [0.147]\n\n\n\n\n\n\nCells: mean bias of ATT(e) over e ≥ 0 [RMSE]. Shading by |bias|: &lt; 0.020.02–0.050.05–0.100.10–0.50≥ 0.50 Monte Carlo standard error of a bias cell: 0.002–0.013 (median 0.004).\n\nWith a constant effect, TWFE and pooled CS coincide with CM-CS when parallel trends hold unconditionally. As soon as the trend depends on \\(X\\) or \\(Z\\), comparing a cohort with the controls matched to other cohorts, which have different covariates, biases both. CM-CS stays on target whenever the trend is driven by the matching covariates, whatever its functional form."
+  },
+  {
+    "objectID": "results.html#dynamic-cohort-heterogeneous-effect",
+    "href": "results.html#dynamic-cohort-heterogeneous-effect",
+    "title": "Results",
+    "section": "Dynamic, cohort-heterogeneous effect",
+    "text": "Dynamic, cohort-heterogeneous effect\nEffects grow with event time and differ across cohorts, \\(ATT(g,e) = a_g + d_g e\\). This is the design reported in the paper’s Monte Carlo table.\n\nNo trendLinear in X and ZLinear in XLinear in ZX × Z interactionQuadratic in XLatent UStep in XStep in latent UDrifting XCohort-specific slopes\n\n\nParallel trends hold unconditionally: there is no trend term.\n\n\n\nUntreated trend linear in X and Z: \\((0.2X+0.2Z)\\,t\\).\n\n\n\nUntreated trend linear in X only: \\(0.2\\,X t\\).\n\n\n\nUntreated trend linear in Z only: \\(0.2\\,Z t\\).\n\n\n\nUntreated trend driven by the interaction X × Z: \\(0.2\\,XZ\\,t\\).\n\n\n\nUntreated trend quadratic in X: \\(0.1\\,X^2 t\\).\n\n\n\nLinear trend in a latent, cohort-correlated characteristic U: \\(0.25\\,U t\\).\n\n\n\nLevel shift from period 8 proportional to X: \\(X\\,\\mathbf{1}(t\\ge 8)\\).\n\n\n\nLevel shift from period 8 proportional to the latent U: \\(U\\,\\mathbf{1}(t\\ge 8)\\).\n\n\n\nTrend in X, with X drifting at cohort-specific rates after matching: \\(0.2\\,X_{it}\\,t\\).\n\n\n\nCohort-specific trend slopes unrelated to X: \\(\\delta_g\\, t\\).\n\n\n\n\n\n\n\n\n\nUntreated trend\n\n\nTrend term\n\n\nTWFE, matched sample\n\n\nCS, pooled matched sample\n\n\nCM-CS (ours)\n\n\n\n\n\n\nNo trend\n\n\n\\(0\\)\n\n\n0.139 [0.212]\n\n\n-0.000 [0.040]\n\n\n-0.002 [0.052]\n\n\n\n\nLinear in X and Z\n\n\n\\((0.2X+0.2Z)\\,t\\)\n\n\n-1.046 [1.048]\n\n\n-1.108 [1.119]\n\n\n-0.003 [0.059]\n\n\n\n\nLinear in X\n\n\n\\(0.2\\,X t\\)\n\n\n-1.290 [1.292]\n\n\n-1.342 [1.353]\n\n\n-0.001 [0.061]\n\n\n\n\nLinear in Z\n\n\n\\(0.2\\,Z t\\)\n\n\n0.374 [0.431]\n\n\n0.219 [0.232]\n\n\n0.001 [0.055]\n\n\n\n\nX × Z interaction\n\n\n\\(0.2\\,XZ\\,t\\)\n\n\n-0.194 [0.215]\n\n\n-0.361 [0.377]\n\n\n0.001 [0.058]\n\n\n\n\nQuadratic in X\n\n\n\\(0.1\\,X^2 t\\)\n\n\n-1.873 [1.875]\n\n\n-1.732 [1.746]\n\n\n0.013 [0.059]\n\n\n\n\nLatent U\n\n\n\\(0.25\\,U t\\)\n\n\n0.470 [0.529]\n\n\n0.309 [0.328]\n\n\n0.058 [0.104]\n\n\n\n\nStep in X\n\n\n\\(X\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n-0.943 [0.945]\n\n\n-0.906 [0.911]\n\n\n0.003 [0.055]\n\n\n\n\nStep in latent U\n\n\n\\(U\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n0.346 [0.398]\n\n\n0.169 [0.182]\n\n\n0.026 [0.073]\n\n\n\n\nDrifting X\n\n\n\\(0.2\\,X_{it}\\,t\\)\n\n\n-2.164 [2.166]\n\n\n-2.154 [2.230]\n\n\n-0.140 [0.179]\n\n\n\n\nCohort-specific slopes\n\n\n\\(\\delta_g\\, t\\)\n\n\n0.806 [0.849]\n\n\n0.617 [0.635]\n\n\n0.114 [0.147]\n\n\n\n\n\n\nCells: mean bias of ATT(e) over e ≥ 0 [RMSE]. Shading by |bias|: &lt; 0.020.02–0.050.05–0.100.10–0.50≥ 0.50 Monte Carlo standard error of a bias cell: 0.002–0.013 (median 0.004).\n\nHeterogeneous effects add a second problem for TWFE: some of its implicit comparisons use already-treated cohorts as controls, so it is biased even with no trend at all. Pooled CS avoids these comparisons but keeps the pooling bias."
+  },
+  {
+    "objectID": "results.html#covariate-dependent-effect",
+    "href": "results.html#covariate-dependent-effect",
+    "title": "Results",
+    "section": "Covariate-dependent effect",
+    "text": "Covariate-dependent effect\nThe effect depends on \\(X\\) with cohort-specific slopes, so each cohort’s average effect depends on its covariate composition: \\(ATT(4) = 2\\), \\(ATT(7) = 3.125\\), \\(ATT(10) = 5\\).\n\nNo trendLinear in X and ZLinear in XLinear in ZX × Z interactionQuadratic in XLatent UStep in XStep in latent UDrifting XCohort-specific slopes\n\n\nParallel trends hold unconditionally: there is no trend term.\n\n\n\nUntreated trend linear in X and Z: \\((0.2X+0.2Z)\\,t\\).\n\n\n\nUntreated trend linear in X only: \\(0.2\\,X t\\).\n\n\n\nUntreated trend linear in Z only: \\(0.2\\,Z t\\).\n\n\n\nUntreated trend driven by the interaction X × Z: \\(0.2\\,XZ\\,t\\).\n\n\n\nUntreated trend quadratic in X: \\(0.1\\,X^2 t\\).\n\n\n\nLinear trend in a latent, cohort-correlated characteristic U: \\(0.25\\,U t\\).\n\n\n\nLevel shift from period 8 proportional to X: \\(X\\,\\mathbf{1}(t\\ge 8)\\).\n\n\n\nLevel shift from period 8 proportional to the latent U: \\(U\\,\\mathbf{1}(t\\ge 8)\\).\n\n\n\nTrend in X, with X drifting at cohort-specific rates after matching: \\(0.2\\,X_{it}\\,t\\).\n\n\n\nCohort-specific trend slopes unrelated to X: \\(\\delta_g\\, t\\).\n\n\n\n\n\n\n\n\n\nUntreated trend\n\n\nTrend term\n\n\nTWFE, matched sample\n\n\nCS, pooled matched sample\n\n\nCM-CS (ours)\n\n\n\n\n\n\nNo trend\n\n\n\\(0\\)\n\n\n0.240 [0.324]\n\n\n-0.005 [0.052]\n\n\n-0.006 [0.063]\n\n\n\n\nLinear in X and Z\n\n\n\\((0.2X+0.2Z)\\,t\\)\n\n\n-0.941 [0.945]\n\n\n-1.111 [1.125]\n\n\n-0.002 [0.061]\n\n\n\n\nLinear in X\n\n\n\\(0.2\\,X t\\)\n\n\n-1.170 [1.173]\n\n\n-1.321 [1.334]\n\n\n0.001 [0.065]\n\n\n\n\nLinear in Z\n\n\n\\(0.2\\,Z t\\)\n\n\n0.479 [0.549]\n\n\n0.224 [0.242]\n\n\n0.001 [0.066]\n\n\n\n\nX × Z interaction\n\n\n\\(0.2\\,XZ\\,t\\)\n\n\n-0.095 [0.192]\n\n\n-0.366 [0.389]\n\n\n-0.001 [0.066]\n\n\n\n\nQuadratic in X\n\n\n\\(0.1\\,X^2 t\\)\n\n\n-1.770 [1.772]\n\n\n-1.732 [1.747]\n\n\n0.002 [0.059]\n\n\n\n\nLatent U\n\n\n\\(0.25\\,U t\\)\n\n\n0.575 [0.643]\n\n\n0.308 [0.328]\n\n\n0.058 [0.106]\n\n\n\n\nStep in X\n\n\n\\(X\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n-0.836 [0.840]\n\n\n-0.904 [0.912]\n\n\n-0.006 [0.066]\n\n\n\n\nStep in latent U\n\n\n\\(U\\,\\mathbf{1}(t\\ge 8)\\)\n\n\n0.460 [0.521]\n\n\n0.178 [0.196]\n\n\n0.036 [0.092]\n\n\n\n\nDrifting X\n\n\n\\(0.2\\,X_{it}\\,t\\)\n\n\n-2.064 [2.066]\n\n\n-2.156 [2.233]\n\n\n-0.147 [0.186]\n\n\n\n\nCohort-specific slopes\n\n\n\\(\\delta_g\\, t\\)\n\n\n0.913 [0.967]\n\n\n0.622 [0.644]\n\n\n0.111 [0.154]\n\n\n\n\n\n\nCells: mean bias of ATT(e) over e ≥ 0 [RMSE]. Shading by |bias|: &lt; 0.020.02–0.050.05–0.100.10–0.50≥ 0.50 Monte Carlo standard error of a bias cell: 0.002–0.013 (median 0.004)."
+  },
+  {
+    "objectID": "results.html#what-cm-cs-does-not-fix",
+    "href": "results.html#what-cm-cs-does-not-fix",
+    "title": "Results",
+    "section": "What CM-CS does not fix",
+    "text": "What CM-CS does not fix\nCM-CS removes the pooling bias, but it is only as good as the matching itself:\n\nLatent trend drivers (Latent U, Step in latent U). Matching on \\(X\\) and \\(Z\\) balances \\(U\\) only insofar as \\(X\\) and \\(Z\\) predict it, which leaves a small bias. All estimators are affected, CM-CS the least.\nCovariates that move after matching (Drifting X). Units that look alike at \\(g-3\\) drift apart afterwards. Matching on the covariate trajectory rather than on a single snapshot largely removes this bias: see the conditioning page.\nCohort-specific slopes unrelated to \\(X\\) (Cohort-specific slopes). Here the matching covariates carry no information about the trend."
+  }
+]
